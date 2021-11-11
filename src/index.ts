@@ -36,7 +36,6 @@ light()
 // FLOOR
 generateFloor()
 
-
 // MODEL WITH ANIMATIONS
 var characterControls: CharacterControls
 new GLTFLoader().load('models/Soldier.glb', function (gltf) {
@@ -99,6 +98,10 @@ function generateFloor() {
     // TEXTURES
     const textureLoader = new THREE.TextureLoader();
     const placeholder = textureLoader.load("./textures/placeholder/placeholder.png");
+    // const sandBaseColor = textureLoader.load("./textures/sand/Sand 002_COLOR.jpg");
+    // const sandNormalMap = textureLoader.load("./textures/sand/Sand 002_NRM.jpg");
+    // const sandHeightMap = textureLoader.load("./textures/sand/Sand 002_DISP.jpg");
+    // const sandAmbientOcclusion = textureLoader.load("./textures/sand/Sand 002_OCC.jpg");
 
     const WIDTH = 4
     const LENGTH = 4
@@ -106,7 +109,13 @@ function generateFloor() {
     const NUM_Z = 15
 
     const geometry = new THREE.PlaneGeometry(WIDTH, LENGTH, 512, 512);
-    const material = new THREE.MeshPhongMaterial({ map: placeholder })
+    // const material = new THREE.MeshStandardMaterial(
+    //     {
+    //         map: sandBaseColor, normalMap: sandNormalMap,
+    //         displacementMap: sandHeightMap, displacementScale: 0.1,
+    //         aoMap: sandAmbientOcclusion
+    //     })
+    const material = new THREE.MeshPhongMaterial({ map: placeholder})
 
     for (let i = 0; i < NUM_X; i++) {
         for (let j = 0; j < NUM_Z; j++) {
