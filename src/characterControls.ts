@@ -66,8 +66,8 @@ export class CharacterControls {
       const toPlay = this.animationsMap.get(play);
       const current = this.animationsMap.get(this.currentAction);
 
-      current.fadeOut(this.fadeDuration);
-      toPlay.reset().fadeIn(this.fadeDuration).play();
+      // current.fadeOut(this.fadeDuration);
+      // toPlay.reset().fadeIn(this.fadeDuration).play();
 
       this.currentAction = play;
     }
