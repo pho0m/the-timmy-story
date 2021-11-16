@@ -2,7 +2,7 @@ import { KeyDisplay } from "./utils";
 import { CharacterControls } from "./characterControls";
 import * as THREE from "three";
 import { CameraHelper } from "three";
-import { Scene3D, PhysicsLoader, Project, ExtendedObject3D } from "enable3d";
+import { Scene3D, PhysicsLoader, Project, ExtendedObject3D } from "enable3d"; //FIXME
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
@@ -31,7 +31,7 @@ renderer.shadowMap.enabled = true;
 const orbitControls = new OrbitControls(camera, renderer.domElement);
 orbitControls.enableDamping = true;
 orbitControls.minDistance = 5;
-orbitControls.maxDistance = 30;
+orbitControls.maxDistance = 50;
 orbitControls.enablePan = true;
 orbitControls.maxPolarAngle = Math.PI / 2 - 0.05;
 orbitControls.update();
@@ -79,15 +79,35 @@ manager.onProgress = function (item, loaded, total) {
 
 var loader = new GLTFLoader(manager);
 
-loader.load("models/components/grass.glb", function (gltf) {
+var grass = new Array();
+
+for (let index = 0; index < 40; index++) {
+  grass.push("models/components/grass.glb");
+}
+
+for (let index = 0; index < grass.length; index++) {
+  loader.load(grass[index], function (gltf) {
+    const model = gltf.scene;
+    model.traverse(function (object: any) {
+      if (object.isMesh) object.castShadow = true;
+    });
+    scene.add(model);
+
+    model.position.x = Math.floor(Math.random() * 22 - Math.random());
+    model.position.z = Math.floor(Math.random() * 22 - Math.random());
+    model.position.y = Math.floor(-1);
+  });
+}
+
+loader.load("models/components/temp.glb", function (gltf) {
   const model = gltf.scene;
   model.traverse(function (object: any) {
     if (object.isMesh) object.castShadow = true;
   });
   scene.add(model);
 
-  model.position.x = Math.floor(Math.random() * 22 - 20);
-  model.position.z = Math.floor(Math.random() * 22 - 20);
+  model.position.x = Math.floor(-43);
+  model.position.z = Math.floor(-30);
   model.position.y = Math.floor(0);
 });
 
@@ -98,8 +118,8 @@ loader.load("models/components/label.glb", function (gltf) {
   });
   scene.add(model);
 
-  model.position.x = Math.floor(Math.random() * 22 - 20);
-  model.position.z = Math.floor(Math.random() * 22 - 20);
+  model.position.x = Math.floor(45);
+  model.position.z = Math.floor(-30);
   model.position.y = Math.floor(0);
 });
 
@@ -110,8 +130,20 @@ loader.load("models/components/Lowpolycar.glb", function (gltf) {
   });
   scene.add(model);
 
-  model.position.x = Math.floor(Math.random() * 22 - 20);
-  model.position.z = Math.floor(Math.random() * 22 - 20);
+  model.position.x = Math.floor(45);
+  model.position.z = Math.floor(-40);
+  model.position.y = Math.floor(0);
+});
+
+loader.load("models/components/tent1.glb", function (gltf) {
+  const model = gltf.scene;
+  model.traverse(function (object: any) {
+    if (object.isMesh) object.castShadow = true;
+  });
+  scene.add(model);
+
+  model.position.x = Math.floor(38);
+  model.position.z = Math.floor(-50);
   model.position.y = Math.floor(0);
 });
 
@@ -213,9 +245,6 @@ window.addEventListener("resize", onWindowResize);
 function generateFloor() {
   // TEXTURES
   const textureLoader = new THREE.TextureLoader();
-  const placeholder = textureLoader.load(
-    "./textures/placeholder/placeholder.png"
-  );
   const roadmap = textureLoader.load("./textures/road/roadmap.png");
 
   const WIDTH = 100;

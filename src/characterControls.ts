@@ -39,10 +39,6 @@ export class CharacterControls {
 
     this.animationsMap.forEach((value, key) => {
       if (key == currentAction) {
-        console.log(key);
-        console.log("-------------------------");
-        console.log(value);
-
         value.play();
       }
     });
@@ -67,8 +63,6 @@ export class CharacterControls {
     } else {
       play = "Idle";
     }
-
-    console.log(play);
 
     if (this.currentAction != play) {
       const toPlay = this.animationsMap.get(play);
