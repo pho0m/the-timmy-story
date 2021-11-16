@@ -2,6 +2,8 @@ export const W = "w";
 export const A = "a";
 export const S = "s";
 export const D = "d";
+export const H = "h";
+
 export const DIRECTIONS = [W, A, S, D];
 
 export class KeyDisplay {
@@ -12,11 +14,13 @@ export class KeyDisplay {
     const a: HTMLDivElement = document.createElement("div");
     const s: HTMLDivElement = document.createElement("div");
     const d: HTMLDivElement = document.createElement("div");
+    const h: HTMLDivElement = document.createElement("div");
 
     this.map.set(W, w);
     this.map.set(A, a);
     this.map.set(S, s);
     this.map.set(D, d);
+    this.map.set(H, h);
 
     this.map.forEach((v, k) => {
       v.style.color = "blue";
