@@ -21,7 +21,7 @@ export class CharacterControls {
 
   // constants
   fadeDuration: number = 0.2;
-  runVelocity = 5;
+  runVelocity = 4;
   walkVelocity = 2;
 
   constructor(
@@ -36,11 +36,17 @@ export class CharacterControls {
     this.mixer = mixer;
     this.animationsMap = animationsMap;
     this.currentAction = currentAction;
+
     this.animationsMap.forEach((value, key) => {
       if (key == currentAction) {
+        console.log(key);
+        console.log("-------------------------");
+        console.log(value);
+
         value.play();
       }
     });
+
     this.orbitControl = orbitControl;
     this.camera = camera;
     this.updateCameraTarget(0, 0);
@@ -62,12 +68,14 @@ export class CharacterControls {
       play = "Idle";
     }
 
+    console.log(play);
+
     if (this.currentAction != play) {
       const toPlay = this.animationsMap.get(play);
       const current = this.animationsMap.get(this.currentAction);
 
-      // current.fadeOut(this.fadeDuration);
-      // toPlay.reset().fadeIn(this.fadeDuration).play();
+      current.fadeOut(this.fadeDuration);
+      toPlay.reset().fadeIn(this.fadeDuration).play();
 
       this.currentAction = play;
     }
