@@ -7,7 +7,7 @@
     "start": "npm run build && npm run serve",
     "build": "webpack",
     "serve": "webpack serve",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d src/"
   },
   "keywords": [],
   "author": "pho0m",
