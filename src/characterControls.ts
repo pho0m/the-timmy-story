@@ -13,7 +13,7 @@ export class CharacterControls {
   toggleRun: boolean = true;
   currentAction: string;
 
-  // temporary data
+  // temporary data/
   walkDirection = new THREE.Vector3();
   rotateAngle = new THREE.Vector3(0, 1, 0);
   rotateQuarternion: THREE.Quaternion = new THREE.Quaternion();
